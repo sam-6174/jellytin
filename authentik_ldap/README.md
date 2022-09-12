@@ -1,7 +1,7 @@
 !! UPDATE THIS README !!
 
 * Copy the variables template via `cp ./template.env ./.env`
-* Set the `SECRET` values within `./local.env`, as described BELOW
+* Set the `SECRET` values within `./.env`, as described BELOW
 * Deploy via `docker-compose up -d`
 
 

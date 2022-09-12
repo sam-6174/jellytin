@@ -18,7 +18,7 @@ services:
       - POSTGRES_PASSWORD=$PG_PASS
       - POSTGRES_USER=$PG_USER
     env_file:
-      - local.env
+      - .env
   authentik_redis:
     image: redis:alpine
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
       # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
       # WORKERS: 2
     env_file:
-      - local.env
+      - .env
     volumes:
       - ./volumes/custom_templates/:/templates
       - ./volumes/media/:/media
@@ -63,7 +63,7 @@ services:
       AUTHENTIK_REDIS__HOST: authentik_redis
       # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
     env_file:
-      - local.env
+      - .env
     # This is optional, and can be removed. If you remove this, the following will happen
     # - The permissions for the /media folders aren't fixed, so make sure they are 1000:1000
     # - The docker socket can't be accessed anymore
@@ -83,7 +83,7 @@ services:
       GEOIPUPDATE_EDITION_IDS: "GeoLite2-City"
       GEOIPUPDATE_FREQUENCY: "8"
     env_file:
-      - local.env
+      - .env
 volumes:
   authentik_database:
     driver: local

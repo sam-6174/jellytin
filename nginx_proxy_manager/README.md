@@ -1,7 +1,7 @@
 This was modified from the NPM [docs](https://nginxproxymanager.com/setup/#running-the-app)
 
 * Copy the variables template via `cp ./template.env ./.env`
-* Open `./local.env` and set the SECRET values
+* Open `./.env` and set the SECRET values
 * Deploy via `docker-compose up -d`
 
 After deploying, you can access the admin gui via [`http://__HOST_IP__:81`](http://__HOST_IP__:81)
