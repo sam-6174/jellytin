@@ -51,6 +51,7 @@ services:
       - "0.0.0.0:$AUTHENTIK_PORT_HTTPS:9443"
     networks:
       - authentik
+      - default
   authentik_worker:
     image: ghcr.io/goauthentik/server:$AUTHENTIK_TAG
     restart: unless-stopped

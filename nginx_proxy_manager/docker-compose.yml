@@ -25,6 +25,7 @@ services:
       # Add any other Stream port you want to expose
       # - 21:21 # FTP
     networks:
+      - default
       - nginx
   npm_mysql:
     image: yobasystems/alpine-mariadb:10.6
