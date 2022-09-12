@@ -1,0 +1,47 @@
+---
+version: "3"
+
+services:
+  nginx_proxy_manager:
+    image: jc21/nginx-proxy-manager:github-pr-2230
+    restart: unless-stopped
+    depends_on:
+      - npm_mysql
+    environment:
+      DB_MYSQL_HOST: npm_mysql
+      DB_MYSQL_NAME: $NPM__MYSQL_DB
+      DB_MYSQL_PASSWORD: $NPM__MYSQL_PASS
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: $NPM__MYSQL_USER
+      # Uncomment if IPv6 is not enabled on your host
+      # DISABLE_IPV6: true
+    volumes:
+      - ./volumes/data:/data
+      - ./volumes/letsencrypt:/etc/letsencrypt
+    ports:
+      - 80:80 # Public HTTP Port
+      - 443:443 # Public HTTPS Port
+      - 81:81 # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - 21:21 # FTP
+    networks:
+      - nginx
+  npm_mysql:
+    image: yobasystems/alpine-mariadb:10.6
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: $NPM__MYSQL_DB
+      MYSQL_PASSWORD: $NPM__MYSQL_PASS
+      MYSQL_ROOT_PASSWORD: $NPM__MYSQL_ROOT_PASS
+      MYSQL_USER: $NPM__MYSQL_USER
+    volumes:
+      - npm_database:/var/lib/mysql
+volumes:
+  npm_database:
+    driver: local
+networks:
+  nginx:
+    name: nginx
+  authentik:
+    name: authentik
+    external: true
