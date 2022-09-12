@@ -34,10 +34,6 @@
 
 ---
 
-Deploy via `docker-compose up -d`
-
----
-
 ### Configure Cloudflare DNS -> Tunnel
 
 * On the Cloudflare website, open the DNS settings for `__MY_SITE__.__COM__`
