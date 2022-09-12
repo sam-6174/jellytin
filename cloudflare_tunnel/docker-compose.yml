@@ -9,7 +9,7 @@ services:
     command: tunnel --no-autoupdate run
     volumes:
       - ./volumes/cloudflared/:/etc/cloudflared
-      - cloudflared_certs:/home/nonroot/.cloudflared/
+      - cloudflared_certs:/home/nonroot/.cloudflared/:rw
     networks:
       - cloudflared
 volumes:
