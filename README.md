@@ -34,6 +34,7 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 # install docker
 curl -sSL https://get.docker.com | sh
 sudo usermod -aG docker "$USER"  # assuming current $USER will run docker
+exec sudo su -l "$USER"          # https://superuser.com/a/609141
 docker run hello-world           # test the install
 sudo systemctl enable docker     # start docker on boot
 
