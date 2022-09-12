@@ -1,0 +1,94 @@
+---
+version: '3.4'
+
+services:
+  authentik_postgresql:
+    image: postgres:12-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - authentik_database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=$PG_DB
+      - POSTGRES_PASSWORD=$PG_PASS
+      - POSTGRES_USER=$PG_USER
+    env_file:
+      - local.env
+  authentik_redis:
+    image: redis:alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+  authentik_server:
+    image: ghcr.io/goauthentik/server:$AUTHENTIK_TAG
+    restart: unless-stopped
+    command: server
+    environment:
+      AUTHENTIK_POSTGRESQL__HOST: authentik_postgresql
+      AUTHENTIK_POSTGRESQL__NAME: $PG_DB
+      AUTHENTIK_POSTGRESQL__PASSWORD: $PG_PASS
+      AUTHENTIK_POSTGRESQL__USER: $PG_USER
+      AUTHENTIK_REDIS__HOST: authentik_redis
+      # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
+      # WORKERS: 2
+    env_file:
+      - local.env
+    volumes:
+      - ./volumes/custom_templates/:/templates
+      - ./volumes/media/:/media
+      - authentik_geoip:/geoip
+    ports:
+      - "0.0.0.0:$AUTHENTIK_PORT_HTTP:9000"
+      - "0.0.0.0:$AUTHENTIK_PORT_HTTPS:9443"
+    networks:
+      - authentik
+  authentik_worker:
+    image: ghcr.io/goauthentik/server:$AUTHENTIK_TAG
+    restart: unless-stopped
+    command: worker
+    environment:
+      AUTHENTIK_POSTGRESQL__HOST: authentik_postgresql
+      AUTHENTIK_POSTGRESQL__NAME: $PG_DB
+      AUTHENTIK_POSTGRESQL__PASSWORD: $PG_PASS
+      AUTHENTIK_POSTGRESQL__USER: $PG_USER
+      AUTHENTIK_REDIS__HOST: authentik_redis
+      # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
+    env_file:
+      - local.env
+    # This is optional, and can be removed. If you remove this, the following will happen
+    # - The permissions for the /media folders aren't fixed, so make sure they are 1000:1000
+    # - The docker socket can't be accessed anymore
+    user: root
+    volumes:
+      - ./volumes/certs/:/certs
+      - ./volumes/custom_templates/:/templates
+      - ./volumes/media/:/media
+      - /var/run/docker.sock:/var/run/docker.sock
+      - authentik_geoip:/geoip
+  authentik_geoipupdate:
+    image: "maxmindinc/geoipupdate:latest"
+    restart: unless-stopped
+    volumes:
+      - authentik_geoip:/usr/share/GeoIP
+    environment:
+      GEOIPUPDATE_EDITION_IDS: "GeoLite2-City"
+      GEOIPUPDATE_FREQUENCY: "8"
+    env_file:
+      - local.env
+volumes:
+  authentik_database:
+    driver: local
+  authentik_geoip:
+    driver: local
+networks:
+  authentik:
+    name: authentik
