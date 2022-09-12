@@ -9,6 +9,6 @@ After deploying, you can access the gui via [`http://__HOST_IP__:9001`](http://_
 ---
 
 Login to the gui via below and set the admin password:
-> [`http://__HOST_IP__:9000/if/flow/initial-setup/`](http://__HOST_IP__:9000/if/flow/initial-setup/_)
+> [`http://__HOST_IP__:9001/if/flow/initial-setup/`](http://__HOST_IP__:9000/if/flow/initial-setup/_)
 
 ☝️ Very important -- don't skip that step ⚠️
