@@ -11,8 +11,7 @@ services:
     volumes:
       - ./volumes/cloudflared/:/etc/cloudflared
     networks:
-      - nginx
+      - cloudflared
 networks:
-  nginx:
-    name: nginx
-    external: true
+  cloudflared:
+    name: cloudflared

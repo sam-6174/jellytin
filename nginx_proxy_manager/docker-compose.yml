@@ -25,8 +25,9 @@ services:
       # Add any other Stream port you want to expose
       # - 21:21 # FTP
     networks:
+      - authentik
+      - cloudflared
       - default
-      - nginx
   npm_mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
@@ -41,8 +42,7 @@ volumes:
   npm_database:
     driver: local
 networks:
-  nginx:
-    name: nginx
   authentik:
     name: authentik
-    external: true
+  cloudflared:
+    name: cloudflared
