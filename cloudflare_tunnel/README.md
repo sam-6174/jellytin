@@ -23,7 +23,7 @@
   TUNNEL_UUID='<PASTE FROM ABOVE>'
   DOMAIN='__MY_SITE__.__COM__'
 
-  cat << EOF >> ./mounts/cloudflared/config.yaml
+  sudo tee ./mounts/cloudflared/config.yaml <<EOF >/dev/null
   tunnel: $TUNNEL_UUID
   ingress:
     - hostname: $DOMAIN
@@ -31,7 +31,10 @@
     - service: http_status:404
   EOF
   ```
-* Restart via `docker-compose restart`
+
+---
+
+Deploy via `docker-compose up -d`
 
 ---
 
