@@ -43,8 +43,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./volumes/custom_templates/:/templates
-      - ./volumes/media/:/media
+      - ./mounts/custom_templates/:/templates
+      - ./mounts/media/:/media
       - authentik_geoip:/geoip
     ports:
       - "0.0.0.0:$AUTHENTIK_PORT_HTTP:9000"
@@ -70,9 +70,9 @@ services:
     # - The docker socket can't be accessed anymore
     user: root
     volumes:
-      - ./volumes/certs/:/certs
-      - ./volumes/custom_templates/:/templates
-      - ./volumes/media/:/media
+      - ./mounts/certs/:/certs
+      - ./mounts/custom_templates/:/templates
+      - ./mounts/media/:/media
       - /var/run/docker.sock:/var/run/docker.sock
       - authentik_geoip:/geoip
   authentik_geoipupdate:

@@ -23,7 +23,7 @@
   TUNNEL_UUID='<PASTE FROM ABOVE>'
   DOMAIN='__MY_SITE__.__COM__'
 
-  cat << EOF >> ./volumes/cloudflared/config.yaml
+  cat << EOF >> ./mounts/cloudflared/config.yaml
   tunnel: $TUNNEL_UUID
   ingress:
     - hostname: $DOMAIN
