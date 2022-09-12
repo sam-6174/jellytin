@@ -1,8 +1,7 @@
-### Deployment
+### Configure
 
 * Copy the variables template via `cp ./template.env ./.env`
 * Set the `CLOUDFLARED_TAG` within `./.env`, based on your arch
-* Deploy via `docker-compose up -d`
 
 ---
 
@@ -41,6 +40,12 @@
 * On the Cloudflare website, open the DNS settings for `__MY_SITE__.__COM__`
 * Modify the `CNAME` to `$TUNNEL_UUID.cfargotunnel.com`
 <img src="./cloudflare-dns-settings-cname.png">
+
+---
+
+### Deploy
+
+`docker-compose up -d`
 
 ---
 

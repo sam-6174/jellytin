@@ -5,13 +5,16 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:$CLOUDFLARED_TAG
     restart: unless-stopped
-    #command: /usr/local/bin/cloudflared tunnel --no-autoupdate run
     entrypoint: /usr/local/bin/cloudflared
     command: tunnel --no-autoupdate run
     volumes:
       - ./volumes/cloudflared/:/etc/cloudflared
+      - cloudflared_certs:/home/nonroot/.cloudflared/
     networks:
       - cloudflared
+volumes:
+  cloudflared_certs:
+    driver: local
 networks:
   cloudflared:
     name: cloudflared
