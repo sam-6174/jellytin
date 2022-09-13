@@ -17,7 +17,7 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - ./mounts/data:/data
-      - ./mounts/letsencrypt:/etc/letsencrypt
+      - npm_letsencrypt:/etc/letsencrypt
     ports:
       - 80:80 # Public HTTP Port
       - 443:443 # Public HTTPS Port
@@ -40,6 +40,8 @@ services:
       - npm_database:/var/lib/mysql
 volumes:
   npm_database:
+    driver: local
+  npm_letsencrypt:
     driver: local
 networks:
   authentik:

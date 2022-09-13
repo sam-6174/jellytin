@@ -70,11 +70,11 @@ services:
     # - The docker socket can't be accessed anymore
     user: root
     volumes:
-      - ./mounts/certs/:/certs
       - ./mounts/custom_templates/:/templates
       - ./mounts/media/:/media
       - /var/run/docker.sock:/var/run/docker.sock
       - authentik_geoip:/geoip
+      - npm_letsencrypt:/certs
   authentik_geoipupdate:
     image: "maxmindinc/geoipupdate:latest"
     restart: unless-stopped
@@ -89,6 +89,8 @@ volumes:
   authentik_database:
     driver: local
   authentik_geoip:
+    driver: local
+  npm_letsencrypt:
     driver: local
 networks:
   authentik:
