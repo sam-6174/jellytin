@@ -48,7 +48,7 @@
 
 ### Test the Tunnel
 
-(note that the above DNS settings make take a second to propagate)
+(note that the above DNS settings may take a second to propagate)
 
 * Open [`https://__MY_SITE__.__COM__`](https://__MY_SITE__.__COM__) in your web browser
 * You should see a page that says:
