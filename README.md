@@ -57,7 +57,16 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 
 
 ### Configure Nginx -> Authentik
-* xx
+* Open the NPM gui for `New Proxy Host`
+  * Under the `Details` tab, set these values:
+    * `Domain Names` = `auth.__MY_SITE__.__COM__`
+    * `Scheme` = `http`
+    * `Forward Hostname` = `authentik_server`
+    * `Forward Port` = `9000`
+      * i.e. the value of `AUTHENTIK_PORT_HTTP` in `./authentik/.env`
+    * enable `Block Common Exploits`
+    * enable `Websockets Support`
+* You should be able to access Authentik via [`https://auth.__MY_SITE__.__COM__`](https://auth.__MY_SITE__.__COM__)
 
 
 ### Deploy Authentik LDAP Service
