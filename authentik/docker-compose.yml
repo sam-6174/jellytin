@@ -86,7 +86,7 @@ services:
       - authentik_media:/media
       - npm_letsencrypt:/certs
   authentik_geoipupdate:
-    image: "maxmindinc/geoipupdate:latest"
+    image: maxmindinc/geoipupdate:v4.9
     restart: unless-stopped
     volumes:
       - authentik_geoip:/usr/share/GeoIP

@@ -3,7 +3,7 @@ version: "3"
 
 services:
   nginx_proxy_manager:
-    image: jc21/nginx-proxy-manager:github-pr-2230
+    image: jc21/nginx-proxy-manager:2.9.14
     restart: unless-stopped
     depends_on:
       - npm_mysql
