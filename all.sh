@@ -19,8 +19,8 @@ if [ "$UP_OR_DOWN" = "up" ]; then
   COMPOSE_ARGS+=('-d')
 fi
 
-for COMPOSE_DIR in 'authentik' 'nginx_proxy_manager' 'cloudflare_tunnel'; do
+for COMPOSE_DIR in 'cloudflare_tunnel' 'authentik' 'nginx_proxy_manager'; do
   echo "Bringing $UP_OR_DOWN '$COMPOSE_DIR'..."
-  (cd "$DIR_PATH/$COMPOSE_DIR" && docker-compose "$UP_OR_DOWN" ${COMPOSE_ARGS[@]+"${COMPOSE_ARGS[@]}"})
+  (cd "$DIR_PATH/$COMPOSE_DIR" && docker-compose "$UP_OR_DOWN" ${COMPOSE_ARGS[@]+"${COMPOSE_ARGS[@]}"}) || echo '^^ ERROR ^^'
   echo ''
 done
