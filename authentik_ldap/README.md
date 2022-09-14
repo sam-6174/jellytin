@@ -27,6 +27,8 @@
       * Copy the `AUTHENTIK_TOKEN`
 * Copy the variables template via `cp ./template.env ./secret.env`
   * Within `./secret.env`:
-    * Update `AUTHENTIK_LDAP__TOKEN` to the value you copied above
-    * Update `AUTHENTIK_LDAP__HOST_BROWSER` as necessary
+    * Update `AUTHENTIK_TOKEN` to the value you copied above
+    * Update `AUTHENTIK_HOST_BROWSER` as necessary
 * Deploy via `docker-compose up -d`
+* Check that the deploy is working via `docker-compose logs`
+  * You should see a message like `{"event":"Fetched outpost configuration", ...}`
