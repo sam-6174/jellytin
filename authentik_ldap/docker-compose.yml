@@ -5,11 +5,10 @@ services:
   authentik_ldap_outpost:
     image: ghcr.io/goauthentik/ldap:$AUTHENTIK_TAG
     restart: unless-stopped
+    env_file:
+      - secret.env
     environment:
-      AUTHENTIK_HOST: http://authentik_server:$AUTHENTIK_LDAP__HOST_PORT
-      AUTHENTIK_HOST_BROWSER: $AUTHENTIK_LDAP__HOST_BROWSER:$AUTHENTIK_LDAP__HOST_PORT
-      AUTHENTIK_INSECURE: 'true'
-      AUTHENTIK_TOKEN: $AUTHENTIK_LDAP__TOKEN
+      AUTHENTIK_HOST: http://authentik_server:$AUTHENTIK_PORT_HTTP
     ports:
       - 389:3389
       - 636:6636

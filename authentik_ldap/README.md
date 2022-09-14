@@ -1,42 +1,32 @@
-!! UPDATE THIS README !!
-
-* Copy the variables template via `cp ./template.env ./.env`
-* Set the `SECRET` values within `./.env`, as described BELOW
+### Deploy LDAP Outpost
+* Open the Authentik Admin Dashboard
+  * Go to `Directory` > `Users`
+    * Select `Create Service Account`
+    * Name the user `service-ldap-outpost`
+  * Go to `Applications` > `Providers`
+    * Click `Create`
+      * Select `LDAP Provider`
+      * On the 2nd tab:
+        * `Name` = `ldap-provider`
+        * `Search Group` = `service-ldap-outpost`
+        * `Base DN` = `DC=ldap,DC=__MY_SITE__,DC=__COM__`
+        * Use default values for all other fields
+  * Go to `Applications` > `Applications`
+    * Click `Create`
+      * `Name` = `ldap-application`
+      * `Provider` = `ldap-provider`
+  * Go to `Applications` > `Outposts`
+    * Click `Create`
+      * `Name` = `ldap-outpost`
+      * `Type` = `LDAP`
+      * `Integration` = `---------`
+        * (We'll integrate by deploying via docker-compose)
+      * `Applications` = `ldap-application`
+    * Click `View Deployment Info` on the outpost you just created
+      * (note that you must access the webui via [https](https://__HOST_IP__:9443))
+      * Copy the `AUTHENTIK_TOKEN`
+* Copy the variables template via `cp ./template.env ./secret.env`
+  * Within `./secret.env`:
+    * Update `AUTHENTIK_LDAP__TOKEN` to the value you copied above
+    * Update `AUTHENTIK_LDAP__HOST_BROWSER` as necessary
 * Deploy via `docker-compose up -d`
-
-
-
-===
-
-Do the below via the Authentik Dashboard, under Applications > ...
-  * Create an LDAP Outpost
-    * `Name` = `LDAP-outpost`
-    * `Type` = `LDAP`
-  * Create an LDAP Provider
-    * `Name` = `LDAP-provider`
-    * `Bind DN` = `DC=ldap,DC=__MY_SITE__,DC=__COM__`  (assuming your domain is `__MY_SITE__.__COM__`)
-    * `Certificate` = `self-signed`
-  * Create an LDAP Application
-    * `Name` = `LDAP-application`
-    * `Slug` = `ldap-application`
-    * `Provider` = `LDAP-provider`
-
----
-
-From the Authentik Admin Dashboard, open `Directory` > `Tokens & App Passwords`
-  * There should be a Token for an LDAP user auto-created by Authentik
-  * Use this value for the SECRET `AUTHENTIK_LDAP__TOKEN` in [./.env](./.env)
-
----
-
-Replace auto-deployed container
-* Use the Portainer dashboard to find the container named `ak-outpost-ldap-outpost`
-  * This container should *not* be attached to any Stack
-    * This container was auto-deployed by Authentik
-  * Stop the container
-  * Now we've replaced this auto-deployed container with the docker-compose from this repo
-* Deploy [./docker-compose.yml](./docker-compose.yml) by either...
-  * ... creating a new Portainer Stack...
-  * ... or adding to the [../authentik/](../authentik/) Portainer Stack
-* Validate that the above docker container is working by checking its logs
-* Remove the auto-deployed container
