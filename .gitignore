@@ -1,4 +1,6 @@
 .vscode/*
 venv/*
 .env
+!authentik_ldap/.env
+secret.env
 **/mounts/
