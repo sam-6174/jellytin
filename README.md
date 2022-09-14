@@ -66,14 +66,17 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
     * enable `Cache Assets`
     * enable `Block Common Exploits`
     * enable `Websockets Support`
-* You should be able to access Authentik via [`https://auth.__MY_SITE__.__COM__`](https://auth.__MY_SITE__.__COM__)
+* You should now be able to access Authentik via [`https://auth.__MY_SITE__.__COM__`](https://auth.__MY_SITE__.__COM__)
 
 
-### Deploy Authentik LDAP Service
-* Deploy via [./authentik_ldap/](./authentik_ldap/)
-
-
-### Configure Authentik & Nginx to Proxy Jellyfin
+### Configure Authentik -> Jellyfin
+1) Open Nginx Proxy Manager and click `Add Proxy Host`
+  * `Domain Names` = `jf.__MY_SITE__.__COM__`
+  * `Scheme` = `http`
+  * `Forward Hostname` = `authentik-server`
+  * `Forward Port` = `9000`
+  * enable `Block Common Exploits`
+  * enable `Websockets Support`
 1) Open the Authentik Admin Dashboard
   * Go to `Applications` > `Providers`
     * Click `Create`
@@ -93,13 +96,11 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
     * Click the 📝 icon to update `authentik Embedded Outpost`
       * Add `Jellyfin` to the list of `Applications`
       * In `Configuration`, ensure that you have `authentik_host: https://auth.__MY_SITE__.__COM__`
-1) Open Nginx Proxy Manager and click `Add Proxy Host`
-  * `Domain Names` = `jf.__MY_SITE__.__COM__`
-  * `Scheme` = `http`
-  * `Forward Hostname` = `authentik-server`
-  * `Forward Port` = `9000`
-  * enable `Block Common Exploits`
-  * enable `Websockets Support`
+1) You should now be able to access Jellyfin via [`https://jf.__MY_SITE__.__COM__`](https://jf.__MY_SITE__.__COM__)
+
+
+### Deploy Authentik LDAP Service
+* Deploy via [./authentik_ldap/](./authentik_ldap/)
 
 
 ### Configure Jellyfin for LDAP Authentication
