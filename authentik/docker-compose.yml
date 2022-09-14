@@ -2,7 +2,7 @@
 version: '3.4'
 
 services:
-  authentik_postgresql:
+  authentik-postgresql:
     image: postgres:12-alpine
     restart: unless-stopped
     healthcheck:
@@ -19,7 +19,7 @@ services:
       - POSTGRES_USER=$PG_USER
     env_file:
       - .env
-  authentik_redis:
+  authentik-redis:
     image: redis:alpine
     restart: unless-stopped
     healthcheck:
@@ -28,24 +28,24 @@ services:
       interval: 30s
       retries: 5
       timeout: 3s
-  authentik_media_chown:
+  authentik-media-chown:
     image: privatebin/chown:1.34.1-musl-1.2.2-r3
     read_only: true
     command: 1000:1000 /mnt
     volumes:
       - authentik_media:/mnt
-  authentik_server:
+  authentik-server:
     image: ghcr.io/goauthentik/server:$AUTHENTIK_TAG
     restart: unless-stopped
     depends_on:
-      - authentik_media_chown
+      - authentik-media-chown
     command: server
     environment:
-      AUTHENTIK_POSTGRESQL__HOST: authentik_postgresql
+      AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__NAME: $PG_DB
       AUTHENTIK_POSTGRESQL__PASSWORD: $PG_PASS
       AUTHENTIK_POSTGRESQL__USER: $PG_USER
-      AUTHENTIK_REDIS__HOST: authentik_redis
+      AUTHENTIK_REDIS__HOST: authentik-redis
       # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
       # WORKERS: 2
     env_file:
@@ -60,18 +60,18 @@ services:
     networks:
       - authentik
       - default
-  authentik_worker:
+  authentik-worker:
     image: ghcr.io/goauthentik/server:$AUTHENTIK_TAG
     restart: unless-stopped
     depends_on:
-      - authentik_media_chown
+      - authentik-media-chown
     command: worker
     environment:
-      AUTHENTIK_POSTGRESQL__HOST: authentik_postgresql
+      AUTHENTIK_POSTGRESQL__HOST: authentik-postgresql
       AUTHENTIK_POSTGRESQL__NAME: $PG_DB
       AUTHENTIK_POSTGRESQL__PASSWORD: $PG_PASS
       AUTHENTIK_POSTGRESQL__USER: $PG_USER
-      AUTHENTIK_REDIS__HOST: authentik_redis
+      AUTHENTIK_REDIS__HOST: authentik-redis
       # AUTHENTIK_ERROR_REPORTING__ENABLED: "true"
     env_file:
       - .env
@@ -84,7 +84,7 @@ services:
       #- /var/run/docker.sock:/var/run/docker.sock
       - authentik_geoip:/geoip
       - authentik_media:/media
-  authentik_geoipupdate:
+  authentik-geoipupdate:
     image: maxmindinc/geoipupdate:v4.9
     restart: unless-stopped
     volumes:

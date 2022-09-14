@@ -61,7 +61,7 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
   * Under the `Details` tab, set these values:
     * `Domain Names` = `auth.__MY_SITE__.__COM__`
     * `Scheme` = `http`
-    * `Forward Hostname` = `authentik_server`
+    * `Forward Hostname` = `authentik-server`
     * `Forward Port` = `9000`
       * i.e. the value of `AUTHENTIK_PORT_HTTP` in `./authentik/.env`
     * enable `Block Common Exploits`

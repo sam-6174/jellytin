@@ -28,9 +28,9 @@
   tunnel: $TUNNEL_UUID
   ingress:
     - hostname: '$DOMAIN'
-      service: http://nginx_proxy_manager:80
+      service: http://nginx-proxy-manager:80
     - hostname: '*.$DOMAIN'
-      service: http://nginx_proxy_manager:80
+      service: http://nginx-proxy-manager:80
     - service: http_status:404
   EOF
   ```

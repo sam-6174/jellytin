@@ -2,13 +2,13 @@
 version: "3"
 
 services:
-  nginx_proxy_manager:
+  nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:2.9.14
     restart: unless-stopped
     depends_on:
-      - npm_mysql
+      - npm-mysql
     environment:
-      DB_MYSQL_HOST: npm_mysql
+      DB_MYSQL_HOST: npm-mysql
       DB_MYSQL_NAME: $NPM__MYSQL_DB
       DB_MYSQL_PASSWORD: $NPM__MYSQL_PASS
       DB_MYSQL_PORT: 3306
@@ -28,7 +28,7 @@ services:
       - authentik
       - cloudflared
       - default
-  npm_mysql:
+  npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
     environment:

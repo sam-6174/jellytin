@@ -2,7 +2,7 @@
 version: '3.4'
 
 services:
-  cloudflared_chown:
+  cloudflared-chown:
     # https://github.com/cloudflare/cloudflared/issues/163
     image: privatebin/chown:1.34.1-musl-1.2.2-r3
     read_only: true
@@ -13,7 +13,7 @@ services:
     image: cloudflare/cloudflared:$CLOUDFLARED_TAG
     restart: unless-stopped
     depends_on:
-      - cloudflared_chown
+      - cloudflared-chown
     command: tunnel --no-autoupdate run
     volumes:
       - ./mounts/cloudflared/:/etc/cloudflared
