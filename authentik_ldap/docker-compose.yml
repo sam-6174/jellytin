@@ -7,8 +7,8 @@ services:
     restart: unless-stopped
     environment:
       AUTHENTIK_HOST: $AUTHENTIK_LDAP__HOST
-      AUTHENTIK_INSECURE: false
-      AUTHENTIK_TOKEN: "$AUTHENTIK_LDAP__TOKEN"
+      AUTHENTIK_INSECURE: 'false'
+      AUTHENTIK_TOKEN: $AUTHENTIK_LDAP__TOKEN
     ports:
       - 389:3389
       - 636:6636
