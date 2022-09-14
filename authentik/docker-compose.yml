@@ -84,7 +84,6 @@ services:
       #- /var/run/docker.sock:/var/run/docker.sock
       - authentik_geoip:/geoip
       - authentik_media:/media
-      - npm_letsencrypt:/certs
   authentik_geoipupdate:
     image: maxmindinc/geoipupdate:v4.9
     restart: unless-stopped
@@ -101,8 +100,6 @@ volumes:
   authentik_geoip:
     driver: local
   authentik_media:
-    driver: local
-  npm_letsencrypt:
     driver: local
 networks:
   authentik:
