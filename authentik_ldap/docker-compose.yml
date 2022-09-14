@@ -6,8 +6,9 @@ services:
     image: ghcr.io/goauthentik/ldap:$AUTHENTIK_TAG
     restart: unless-stopped
     environment:
-      AUTHENTIK_HOST: $AUTHENTIK_LDAP__HOST
-      AUTHENTIK_INSECURE: 'false'
+      AUTHENTIK_HOST: http://authentik_server:$AUTHENTIK_LDAP__HOST_PORT
+      AUTHENTIK_HOST_BROWSER: $AUTHENTIK_LDAP__HOST_BROWSER:$AUTHENTIK_LDAP__HOST_PORT
+      AUTHENTIK_INSECURE: 'true'
       AUTHENTIK_TOKEN: $AUTHENTIK_LDAP__TOKEN
     ports:
       - 389:3389
@@ -17,4 +18,3 @@ services:
 networks:
   authentik:
     name: authentik
-    external: true
