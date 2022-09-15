@@ -77,7 +77,7 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
   * `Forward Port` = `9000`
   * enable `Block Common Exploits`
   * enable `Websockets Support`
-1) Open the Authentik Admin Dashboard
+2) Open the Authentik Admin Dashboard
   * Go to `Applications` > `Providers`
     * Click `Create`
       * Select `Proxy Provider`
@@ -96,7 +96,7 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
     * Click the 📝 icon to update `authentik Embedded Outpost`
       * Add `Jellyfin` to the list of `Applications`
       * In `Configuration`, ensure that you have `authentik_host: https://auth.__MY_SITE__.__COM__`
-1) You should now be able to access Jellyfin via [`https://jf.__MY_SITE__.__COM__`](https://jf.__MY_SITE__.__COM__)
+3) You should now be able to access Jellyfin via [`https://jf.__MY_SITE__.__COM__`](https://jf.__MY_SITE__.__COM__)
 
 
 ### Deploy Authentik LDAP Service
@@ -104,17 +104,38 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 
 
 ### Configure Jellyfin for LDAP Authentication
-* xx
+1) Open the Authentik Admin Dashboard
+  * Go to `Directory` > `Groups`
+    * `Create` two groups:
+      1) `jellyfin-users`
+      1) `jellyfin-admins`
+  * Go to `Directory` > `Users`
+    * Click `Root`
+    * Click `˅` to expand user `service-ldap-outpost`
+    * Click `Set Password`
+    * You can use `openssl rand -base64 36` to generate a secure password
+2) Install the [Jellyfin LDAP-Auth Plugin](https://github.com/jellyfin/jellyfin-plugin-ldapauth#installation)
+3) Configure the plugin's settings via Jellyfin UI
+  * `LDAP Server` = `__HOST_IP__`
+  * `Secure LDAP` = false
+  * `LDAP Base DN for searches` = `dc=ldap,dc=__MY_SITE__,dc=__COM__`
+  * `LDAP Port` = `389`
+  * `LDAP Attributes` = `cn`
+  * `LDAP Name Attribute` = `cn`
+  * `LDAP User Filter` = `(memberOf=cn=jellyfin-users,ou=groups,dc=ldap,dc=__MY_SITE__,dc=__COM__)`
+  * `LDAP Admin Filter` = `(memberOf=cn=jellyfin-admins,ou=groups,dc=ldap,dc=__MY_SITE__,dc=__COM__)`
+  * `LDAP Bind User` = `cn=service-ldap-outpost,ou=users,dc=ldap,dc=__MY_SITE__,dc=__COM__`
+  * `LDAP Bind User Password` = `__PASSWORD_FROM_ABOVE__`
 
 
-
-
-Install Nginx Proxy Manager
-https://geekscircuit.com/set-up-authentik-sso-with-nginx-proxy-manager/
-https://docs.ibracorp.io/authentik/authentik/authentik-proxy-solution
-
-
-configure authentik ldap
-  - https://github.com/jellyfin/jellyfin-plugin-ldapauth/issues/120
-  - https://goauthentik.io/integrations/services/pfsense/
-  - https://goauthentik.io/integrations/services/sssd/
+### Create Jellyfin Users via Authentik
+1) Open the Authentik Admin Dashboard
+  * Go to `Directory` > `Users`
+  * Click `Create`
+    * `Username` = `<name_of_your_jellyfin_user>`
+    * `Groups` = `jellyfin-users`
+  * Click `˅` to expand user `service-ldap-outpost`
+    * Click `Set password`
+    * Configure the user's password
+2) You should now be able to login to Jellyfin with the above user via [`https://jf.__MY_SITE__.__COM__`](https://jf.__MY_SITE__.__COM__)
+  * (note that with caching enabled on the LDAP Provider, it may take up to 5 minutes for the refresh to load a new user)
