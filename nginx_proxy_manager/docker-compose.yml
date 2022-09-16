@@ -17,6 +17,7 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - ./mounts/data:/data
+      - ./nginx_custom/http_top.conf:/data/nginx/custom/http_top.conf
       - npm_letsencrypt:/etc/letsencrypt
     ports:
       - 80:80 # Public HTTP Port
