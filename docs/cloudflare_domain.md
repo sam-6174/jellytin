@@ -13,5 +13,6 @@
 * Configure `<security stuff>`
   * Sorry, this isn't fully documented...
     * ... feel free to open a PR & improve this =)
-  * Cloudflare will recommend multiple security settings for you, so explore around the dashboard
-    * For example, it should recommend setting `DMARC` configs under DNS management
+  * Cloudflare will recommend multiple security settings for you, so explore around the dashboard, for example:
+    * Under DNS management, it should prompt you to set various `DMARC` configs to prevent email spoofing
+    * There should be a `Review Settings` button on the `Website Overview` dashboard, which points to a link like [this](https://dash.cloudflare.com/__WEBSITE_ID__/__MY_SITE__.__COM__/recommendations)
