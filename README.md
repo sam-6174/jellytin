@@ -12,6 +12,9 @@ This project is especially helpful if you:
 1) Wish to hide + secure Jellyfin behind an identity provider
    1) (and also wish to access Jellyfin via non-browser clients, e.g. Android app)
 
+If you're wondering, "why can't I just expose my Jellyfin server to the internet?"
+I recommend reading [Collection of potential security issues in Jellyfin](https://github.com/jellyfin/jellyfin/issues/5415)
+
 
 ### Dependencies
 * [Authentik](https://goauthentik.io/)
