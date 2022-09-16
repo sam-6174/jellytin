@@ -5,6 +5,10 @@ services:
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:2.9.14
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
     depends_on:
       - npm-mysql
     environment:
