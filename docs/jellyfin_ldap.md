@@ -4,7 +4,7 @@
         1) `jellyfin-users`
         1) `jellyfin-admins`
     * Go to `Directory` > `Users`
-      * Click `Root`
+      * Click `📁 Root`
       * Click `˅` to expand user `service-ldap-outpost`
       * Click `Set Password`
       * You can use `openssl rand -base64 36` to generate a secure password
