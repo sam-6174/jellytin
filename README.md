@@ -61,3 +61,13 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 
 ### Create Jellyfin Users via Authentik
 * Create via [./docs/jellyfin_ldap_users.md](./docs/jellyfin_ldap_users.md)
+
+---
+
+At this point, you can access Jellyfin through Authentik via a web browser,
+but you won't be able to access Jellyfin through, for example, the Android app.
+
+To access Jellyfin through apps, we'll configure ip whitelisting so that the
+apps will work from the most recent ip you've logged into Authentik from.
+
+---
