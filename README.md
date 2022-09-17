@@ -10,7 +10,6 @@ This project is especially helpful if you:
 1) Have a local Jellyfin server that you want to access over the internet
 1) Do *not* currently have any infrastructure to expose services to the internet
 1) Wish to hide + secure Jellyfin behind an identity provider
-   1) (and also wish to access Jellyfin via non-browser clients, e.g. Android app)
 
 If you're wondering, "why can't I just expose my Jellyfin server to the internet?"
 I recommend reading [Collection of potential security issues in Jellyfin](https://github.com/jellyfin/jellyfin/issues/5415)
@@ -64,13 +63,3 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 
 ### Create Jellyfin Users via Authentik
 * Create via [./docs/jellyfin_ldap_users.md](./docs/jellyfin_ldap_users.md)
-
----
-
-At this point, you can access Jellyfin through Authentik via a web browser,
-but you won't be able to access Jellyfin through, for example, the Android app.
-
-To access Jellyfin through apps, we'll configure ip whitelisting so that the
-apps will work from the most recent ip you've logged into Authentik from.
-
----
