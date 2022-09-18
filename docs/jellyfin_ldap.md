@@ -16,3 +16,4 @@
     * `LDAP Admin Filter` = `(memberOf=cn=jellyfin-admins,ou=groups,dc=ldap,dc=__MY_SITE__,dc=__COM__)`
     * `LDAP Bind User` = `cn=service-ldap-outpost,ou=users,dc=ldap,dc=__MY_SITE__,dc=__COM__`
     * `LDAP Bind User Password` = `__PASSWORD_FROM_ABOVE__`
+    * `Enable Case Insensitive Username` = true
