@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="./jellytin-dark.svg#gh-dark-mode-only" width="300">
-  <img src="./jellytin-light.svg#gh-light-mode-only" width="300">
+  <img src="./assets/jellytin-dark.svg#gh-dark-mode-only" width="300">
+  <img src="./assets/jellytin-light.svg#gh-light-mode-only" width="300">
 </p>
 
 # Jellytin

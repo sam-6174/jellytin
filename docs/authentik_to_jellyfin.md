@@ -23,7 +23,7 @@
         * `Name` = `Jellyfin`
         * `Provider` = `jellyfin-provider`
         * Under `UI settings`
-          * Upload an `Icon`, e.g. [this](https://jellyfin.org/images/banner-dark.svg)
+          * Upload an `Icon`, e.g. [this](../assets/jellyfin.svg)
       * Click `Jellyfin` (the app you just created) > `Policy / Group / User Bindings`
         * `Create Binding` for each `Group`:
           1) `jellyfin-users`
