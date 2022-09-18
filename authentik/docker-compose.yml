@@ -29,7 +29,7 @@ services:
       retries: 5
       timeout: 3s
   authentik-media-chown:
-    image: privatebin/chown:1.34.1-musl-1.2.2-r3
+    image: privatebin/chown:$CHOWN_TAG
     read_only: true
     command: 1000:1000 /mnt
     volumes:

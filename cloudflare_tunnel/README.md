@@ -1,7 +1,6 @@
 ### Configure
 
 * Copy the variables template via `cp ./template.env ./.env`
-* Set the `CLOUDFLARED_TAG` within `./.env`, based on your arch
 
 ---
 
