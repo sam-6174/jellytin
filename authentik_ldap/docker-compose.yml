@@ -1,0 +1,19 @@
+---
+version: '3.4'
+
+services:
+  authentik-ldap-outpost:
+    image: ghcr.io/goauthentik/ldap:$AUTHENTIK_TAG
+    restart: unless-stopped
+    env_file:
+      - secret.env
+    environment:
+      AUTHENTIK_HOST: http://authentik-server:9000
+    ports:
+      - 389:3389
+      - 636:6636
+    networks:
+      - authentik
+networks:
+  authentik:
+    name: authentik

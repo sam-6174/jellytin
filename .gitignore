@@ -1,0 +1,16 @@
+.vscode/*
+venv/*
+**/.DS_Store
+
+secret.env
+.env
+!authentik_ldap/.env
+
+*/mounts
+!/nginx_proxy_manager/mounts
+/nginx_proxy_manager/mounts/*
+!/nginx_proxy_manager/mounts/data
+/nginx_proxy_manager/mounts/data/*
+!/nginx_proxy_manager/mounts/data/nginx
+/nginx_proxy_manager/mounts/data/nginx/*
+!/nginx_proxy_manager/mounts/data/nginx/custom
