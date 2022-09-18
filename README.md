@@ -1,4 +1,7 @@
-<img src="./jellytin.png"></img>
+<p align="center">
+  <img src="./jellytin-dark.svg#gh-dark-mode-only" width="300">
+  <img src="./jellytin-light.svg#gh-light-mode-only" width="300">
+</p>
 
 # Jellytin
 
@@ -24,8 +27,22 @@ I recommend reading [Collection of potential security issues in Jellyfin](https:
   * Serve content without forwarding ports on your router
 
 
+### Future Improvements
+
+1) This setup currently only allows for access to Jellyfin via web clients.
+Jellyfin lacks external authentication capabilities for other clients.
+See examples [here](https://github.com/jellyfin/jellyfin-android/issues/123), [here](https://features.jellyfin.org/posts/471/header-authentication), & [here](https://features.jellyfin.org/posts/1461/capability-to-specify-client-certificate-for-android-client).
+
+1) Keep an eye on Jellyfin's [SSO plugin](https://github.com/9p4/jellyfin-plugin-sso)
+and incorporate it here, once it is stable and no longer "100% alpha software."
+
+1) Await NPM's [Fail2Ban feature request](https://github.com/NginxProxyManager/nginx-proxy-manager/issues/39).
+
+1) Await NPM's [CrowdSec feature request](https://github.com/NginxProxyManager/nginx-proxy-manager/issues/1131).
+
+
 ### Footnote
-If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/).
+If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.raspberrypi.com/news/raspberry-pi-os-64-bit/).
 
 
 # Instructions
@@ -63,3 +80,9 @@ If you're using a Raspberry Pi, then you should run the [64-bit OS](https://www.
 
 ### Create Jellyfin Users via Authentik
 * Create via [./docs/jellyfin_ldap_users.md](./docs/jellyfin_ldap_users.md)
+
+---
+
+### The End 🎉
+
+You can use the helper script at [`./all.sh`](./all.sh) to control this stack.
