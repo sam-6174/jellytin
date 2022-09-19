@@ -29,9 +29,13 @@ I recommend reading [Collection of potential security issues in Jellyfin](https:
 
 ### Future Improvements
 
+1) Replace Cloudflare tunnel with VPS tunnel; it's against Cloudflare's TOS to proxy non-html content.
+
 1) This setup currently only allows for access to Jellyfin via web clients.
 Jellyfin lacks external authentication capabilities for other clients.
-See examples [here](https://github.com/jellyfin/jellyfin-android/issues/123), [here](https://features.jellyfin.org/posts/471/header-authentication), & [here](https://features.jellyfin.org/posts/1461/capability-to-specify-client-certificate-for-android-client).
+See examples [here](https://github.com/jellyfin/jellyfin-android/issues/123),
+[here](https://features.jellyfin.org/posts/471/header-authentication),
+& [here](https://features.jellyfin.org/posts/1461/capability-to-specify-client-certificate-for-android-client).
 
 1) Keep an eye on Jellyfin's [SSO plugin](https://github.com/9p4/jellyfin-plugin-sso)
 and incorporate it here, once it is stable and no longer "100% alpha software."
