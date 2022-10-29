@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     hostname: vps-tunnel
     environment:
-      TS_AUTH_KEY: $TAILSCALE__AUTH_KEY
+      #TS_SOCKET: /tmp/tailscaled.sock
       TS_STATE_DIR: /var/lib/tailscale_state
       TS_USERSPACE: 'true'
     volumes:
