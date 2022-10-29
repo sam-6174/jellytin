@@ -21,15 +21,13 @@ I recommend reading [Collection of potential security issues in Jellyfin](https:
 ### Dependencies
 * [Authentik](https://goauthentik.io/)
   * Provide authentication via LDAP, SSO, etc.
+* [Tailscale](https://tailscale.com/)
+  * Tunnel from VPS to NPM
 * [Nginx Proxy Manager](https://nginxproxymanager.com/)
-  * Proxy between `Cloudflare Tunnel` -> `Nginx Reverse Proxy` -> `Authentik` -> `Jellyfin`
-* [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/)
-  * Serve content without forwarding ports on your router
+  * Proxy between `VPS` -> `Tailscale` -> `Nginx Reverse Proxy` -> `Authentik` -> `Jellyfin`
 
 
 ### Future Improvements
-
-1) Replace Cloudflare tunnel with VPS tunnel; it's against Cloudflare's TOS to proxy non-html content.
 
 1) This setup currently only allows for access to Jellyfin via web clients.
 Jellyfin lacks external authentication capabilities for other clients.
@@ -67,8 +65,8 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 ### Purchase & Configure Cloudflare Domain
 * Configure via [./docs/cloudflare_domain.md](./docs/cloudflare_domain.md)
 
-### Deploy Cloudflare Tunnel
-* Deploy via [./cloudflare_tunnel/](./cloudflare_tunnel/)
+### Deploy VPS Tunnel
+* Deploy via [./vps_tunnel/](./vps_tunnel/)
 
 ### Configure Nginx -> Authentik
 * Configure via [./docs/npm_to_authentik.md](./docs/npm_to_authentik.md)

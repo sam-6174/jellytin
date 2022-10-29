@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  tailscale:
+    image: tailscale/tailscale:$TAILSCALE_TAG
+    restart: unless-stopped
+    hostname: vps-tunnel
+    environment:
+      TS_AUTH_KEY: $TAILSCALE__AUTH_KEY
+      TS_STATE_DIR: /var/lib/tailscale_state
+      TS_USERSPACE: 'true'
+    volumes:
+      - tailscale_state:/var/lib/tailscale_state
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:$NPM_TAG
+    restart: unless-stopped
+    depends_on:
+      - npm-mysql
+      - tailscale
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
+    environment:
+      DB_MYSQL_HOST: npm-mysql
+      DB_MYSQL_NAME: $NPM__MYSQL_DB
+      DB_MYSQL_PASSWORD: $NPM__MYSQL_PASS
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: $NPM__MYSQL_USER
+      # Uncomment if IPv6 is not enabled on your host
+      # DISABLE_IPV6: true
+    volumes:
+      - npm_letsencrypt:/etc/letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+      - 81:81  # Admin Web Port
+    network_mode: "service:tailscale"
+  npm-mysql:
+    image: yobasystems/alpine-mariadb:10.6
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: $NPM__MYSQL_DB
+      MYSQL_PASSWORD: $NPM__MYSQL_PASS
+      MYSQL_ROOT_PASSWORD: $NPM__MYSQL_ROOT_PASS
+      MYSQL_USER: $NPM__MYSQL_USER
+    volumes:
+      - npm_database:/var/lib/mysql
+volumes:
+  npm_database:
+    driver: local
+  npm_letsencrypt:
+    driver: local
+  tailscale_state:
+    driver: local
