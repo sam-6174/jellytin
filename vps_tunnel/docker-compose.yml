@@ -5,11 +5,14 @@ services:
     restart: unless-stopped
     hostname: vps-tunnel
     environment:
-      #TS_SOCKET: /tmp/tailscaled.sock
       TS_STATE_DIR: /var/lib/tailscale_state
       TS_USERSPACE: 'true'
     volumes:
       - tailscale_state:/var/lib/tailscale_state
+    ports:  # NPM ports via `network_mode`
+      - 80:80
+      - 443:443
+      - 81:81
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
     restart: unless-stopped
@@ -30,10 +33,6 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - npm_letsencrypt:/etc/letsencrypt
-    ports:
-      - 80:80
-      - 443:443
-      - 81:81  # Admin Web Port
     network_mode: "service:tailscale"
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
