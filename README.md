@@ -25,6 +25,8 @@ The final deployment looks like this:
 ### Dependencies
 * Virtual Private Server (VPS)
   * Additional layer of security, e.g. hide your personal IP
+  * [BuyKVM](https://buyvm.net/kvm-dedicated-server-slices/) is $2/month,
+  but any VPS with an IPv4 address will do
 * [Nginx Proxy Manager](https://nginxproxymanager.com/)
   * Management UI for Nginx
 * [Tailscale](https://tailscale.com/)
