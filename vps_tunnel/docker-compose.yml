@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     hostname: vps-tunnel
     environment:
+      TS_EXTRA_ARGS: --advertise-tags=tag:vps_tunnel
       TS_STATE_DIR: /var/lib/tailscale_state
       TS_USERSPACE: 'true'
     volumes:
