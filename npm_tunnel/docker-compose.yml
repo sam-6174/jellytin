@@ -5,7 +5,6 @@ services:
   tailscale:
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
-    hostname: npm-tunnel
     environment:
       TS_STATE_DIR: /var/lib/tailscale_state
       TS_USERSPACE: 'true'
