@@ -2,7 +2,7 @@
 version: "3"
 
 services:
-  tailscale:
+  npm-tailscale:
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
     environment:
