@@ -17,14 +17,22 @@ This project is especially helpful if you:
 If you're wondering, "why can't I just expose my Jellyfin server to the internet?"
 I recommend reading [Collection of potential security issues in Jellyfin](https://github.com/jellyfin/jellyfin/issues/5415)
 
+The final deployment looks like this:
+
+👤 -> `VPS` -> `Nginx` -> `Tailscale` -> `Nginx` -> `Authentik` -> `Jellyfin`
+
 
 ### Dependencies
+* Virtual Private Server (VPS)
+  * Additional layer of security, e.g. hide your personal IP
+* [Nginx Proxy Manager](https://nginxproxymanager.com/)
+  * Management UI for Nginx
+* [Tailscale](https://tailscale.com/)
+  * Tunnel from VPS to your local network
 * [Authentik](https://goauthentik.io/)
   * Provide authentication via LDAP, SSO, etc.
-* [Tailscale](https://tailscale.com/)
-  * Tunnel from VPS to NPM
-* [Nginx Proxy Manager](https://nginxproxymanager.com/)
-  * Proxy between `VPS` -> `Tailscale` -> `Nginx Reverse Proxy` -> `Authentik` -> `Jellyfin`
+* [Jellyfin](https://jellyfin.org/downloads/)
+  * You should already have a Jellyfin server
 
 
 ### Future Improvements
