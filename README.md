@@ -73,11 +73,17 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 ### Purchase & Configure Cloudflare Domain
 * Configure via [./docs/cloudflare_domain.md](./docs/cloudflare_domain.md)
 
+### Harden Your VPS
+* Harden via [./docs/vps_harden.md](./docs/vps_harden.md)
+
 ### Deploy VPS Tunnel
 * Deploy via [./vps_tunnel/](./vps_tunnel/)
 
 ### Deploy NPM Tunnel
 * Deploy via [./npm_tunnel/](./npm_tunnel/)
+
+### Configure Tunnel Routing
+* Configure via [./docs/vps_routing.md](./docs/vps_routing.md)
 
 ### Configure Nginx -> Authentik
 * Configure via [./docs/npm_to_authentik.md](./docs/npm_to_authentik.md)
