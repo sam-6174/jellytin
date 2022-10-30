@@ -1,3 +1,5 @@
+# Configure Nginx -> Authentik
+
 * Open Nginx Proxy Manager and click `Add Proxy Host`
   * Under the `Details` tab, set these values:
     * `Domain Names` = `auth.__MY_SITE__.__COM__`

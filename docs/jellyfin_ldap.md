@@ -1,3 +1,5 @@
+# Configure Jellyfin for LDAP Authentication
+
 1) Open the Authentik Admin Dashboard
     * Go to `Directory` > `Users`
       * Click `📁 Root`

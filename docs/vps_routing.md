@@ -1,4 +1,4 @@
-# Route Internet -> VPS -> Tailscale
+# Route 👤 -> `VPS` -> `Nginx` -> `Tailscale` -> `Nginx`
 
 
 ### Configure Tailscale
@@ -7,7 +7,7 @@
   * TODO
 
 
-### Configure NPM Proxy
+### Configure `Nginx` -> `Tailscale` -> `Nginx`
 
 * TODO
 
@@ -17,6 +17,6 @@
 * TODO
 
 
-### Configure Cloudflare DNS -> VPS
+### Configure Cloudflare DNS -> `VPS`
 
 * TODO

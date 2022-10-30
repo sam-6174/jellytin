@@ -1,3 +1,5 @@
+# Purchase & Configure Cloudflare Domain
+
 * Purchase your domain via [this](https://developers.cloudflare.com/registrar/get-started/register-domain)
 * We'll assume that you purchase a domain of `__MY_SITE__.__COM__`
 * Login to [cloudflare](https://cloudflare.com)

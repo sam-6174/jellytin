@@ -1,3 +1,5 @@
+# Create Jellyfin Users via Authentik
+
 1) Open the Authentik Admin Dashboard
     * Go to `Directory` > `Users`
     * Click `Create`

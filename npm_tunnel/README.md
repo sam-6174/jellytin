@@ -1,3 +1,6 @@
+# Deploy Tailscale Sidecar
+
+
 1) Config `./.env`
     * Copy the variables template via `cp ./template.env ./.env`
 1) Authenticate Tailscale Container

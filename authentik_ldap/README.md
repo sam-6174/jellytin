@@ -1,4 +1,6 @@
-### Deploy LDAP Outpost
+# Deploy Authentik LDAP Outpost
+
+
 * Open the Authentik Admin Dashboard
   * Go to `Directory` > `Users`
     * Select `Create Service Account`

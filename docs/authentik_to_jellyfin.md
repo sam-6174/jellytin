@@ -1,3 +1,5 @@
+# Configure Authentik -> Jellyfin
+
 1) Open Nginx Proxy Manager and click `Add Proxy Host`
     * `Domain Names` = `jf.__MY_SITE__.__COM__`
     * `Scheme` = `http`
