@@ -19,7 +19,7 @@
     * The container's output should update with an eventual `health("overall"): ok`
     * `Ctrl-C` to kill the container
 1) Disable Key Expiry for `vps-tunnel` machine
-    * Via the [docs](https://web.archive.org/web/20221019082019/https://tailscale.com/kb/1028/key-expiry/#disabling-key-expiry)
+    * Via the [docs](https://tailscale.com/kb/1028/key-expiry/#disabling-key-expiry)
 1) Deploy the Stack
     * Deploy via `docker-compose up -d`
     * Check the stack's health via `docker-compose ps`
