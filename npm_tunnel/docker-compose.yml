@@ -1,0 +1,17 @@
+---
+version: "3"
+
+services:
+  tailscale:
+    image: tailscale/tailscale:$TAILSCALE_TAG
+    restart: unless-stopped
+    hostname: npm-tunnel
+    environment:
+      TS_STATE_DIR: /var/lib/tailscale_state
+      TS_USERSPACE: 'true'
+    volumes:
+      - tailscale_state:/var/lib/tailscale_state
+    network_mode: "container:nginx-proxy-manager"
+volumes:
+  tailscale_state:
+    driver: local

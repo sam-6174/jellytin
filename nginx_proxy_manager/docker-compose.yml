@@ -4,6 +4,7 @@ version: "3"
 services:
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
+    container_name: nginx-proxy-manager
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/bin/check-health"]
@@ -30,7 +31,6 @@ services:
       # - 21:21 # FTP
     networks:
       - authentik
-      - cloudflared
       - default
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
@@ -50,5 +50,3 @@ volumes:
 networks:
   authentik:
     name: authentik
-  cloudflared:
-    name: cloudflared

@@ -76,6 +76,9 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 ### Deploy VPS Tunnel
 * Deploy via [./vps_tunnel/](./vps_tunnel/)
 
+### Deploy NPM Tunnel
+* Deploy via [./npm_tunnel/](./npm_tunnel/)
+
 ### Configure Nginx -> Authentik
 * Configure via [./docs/npm_to_authentik.md](./docs/npm_to_authentik.md)
 
