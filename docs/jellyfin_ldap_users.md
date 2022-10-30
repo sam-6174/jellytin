@@ -3,7 +3,7 @@
     * Click `Create`
       * `Username` = `<name_of_your_jellyfin_user>`
       * `Groups` = `jellyfin-users`
-    * Click `˅` to expand user `service-ldap-outpost`
+    * Click `˅` to expand user `<name_of_your_jellyfin_user>`
       * Click `Set password`
       * Configure the user's password
 1) You should now be able to login to Jellyfin with the above user via [`https://jf.__MY_SITE__.__COM__`](https://jf.__MY_SITE__.__COM__)
