@@ -6,6 +6,9 @@ services:
     restart: unless-stopped
     hostname: vps-tunnel
     command: tailscaled
+    environment:
+      TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
+      TS_STATE_DIR: /var/lib/tailscale_state
     network_mode: host
     volumes:
       - tailscale_state:/var/lib/tailscale_state
