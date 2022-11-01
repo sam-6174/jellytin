@@ -1,22 +1,18 @@
 version: "3.9"
 services:
   tailscale:
+    privileged: true
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
     hostname: vps-tunnel
     command: tailscaled
-    environment:
-      TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
-      TS_STATE_DIR: /var/lib/tailscale_state
+    network_mode: host
+    volumes:
+      - tailscale_state:/var/lib/tailscale_state
+      - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
       - sys_module
-    volumes:
-      - /dev/net/tun:/dev/net/tun
-      - tailscale_state:/var/lib/tailscale_state
-    ports:  # NPM ports via `network_mode`
-      - 80:80
-      - 443:443
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
     restart: unless-stopped
@@ -37,7 +33,9 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - npm_letsencrypt:/etc/letsencrypt
-    network_mode: service:tailscale
+    ports:  # NPM ports via `network_mode`
+      - 80:80
+      - 443:443
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
