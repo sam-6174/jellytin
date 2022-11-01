@@ -13,7 +13,6 @@ services:
     ports:  # NPM ports via `network_mode`
       - 80:80
       - 443:443
-      - 81:81
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
     restart: unless-stopped
