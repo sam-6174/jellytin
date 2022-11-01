@@ -7,8 +7,11 @@ services:
     environment:
       TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
       TS_STATE_DIR: /var/lib/tailscale_state
-      TS_USERSPACE: 'true'
+    cap_add:
+      - net_admin
+      - sys_module
     volumes:
+      - /dev/net/tun:/dev/net/tun
       - tailscale_state:/var/lib/tailscale_state
     ports:  # NPM ports via `network_mode`
       - 80:80
@@ -33,7 +36,7 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - npm_letsencrypt:/etc/letsencrypt
-    network_mode: "service:tailscale"
+    network_mode: service:tailscale
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
