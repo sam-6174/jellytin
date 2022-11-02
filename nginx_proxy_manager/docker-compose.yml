@@ -4,8 +4,6 @@ version: "3"
 services:
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
-    container_name: nginx-proxy-manager
-    hostname: nginx-proxy-manager
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/bin/check-health"]
