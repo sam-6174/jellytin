@@ -2,20 +2,21 @@ version: "3.9"
 services:
   tailscale:
     privileged: true
+    network_mode: host
+    cap_add:
+      - net_admin
+      - sys_module  # try deleting this
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
     hostname: vps-tunnel
-    command: tailscaled --statedir=/var/lib/tailscale_state
+    command: tailscaled --statedir=/var/lib/tailscale_state  # try using env var
     environment:
       TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock
       TS_STATE_DIR: /var/lib/tailscale_state
-    network_mode: host
     volumes:
       - tailscale_state:/var/lib/tailscale_state
       - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - net_admin
-      - sys_module
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
     restart: unless-stopped
@@ -36,7 +37,7 @@ services:
       # DISABLE_IPV6: true
     volumes:
       - npm_letsencrypt:/etc/letsencrypt
-    ports:  # NPM ports via `network_mode`
+    ports:
       - 80:80
       - 443:443
   npm-mysql:
