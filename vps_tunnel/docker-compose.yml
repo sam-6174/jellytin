@@ -5,11 +5,11 @@ services:
     network_mode: host
     cap_add:
       - net_admin
-      - sys_module  # try deleting this
+      - sys_module
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
     hostname: vps-tunnel
-    command: tailscaled --statedir=/var/lib/tailscale_state  # try using env var
+    command: tailscaled --statedir=$$TS_STATE_DIR
     environment:
       TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
       TS_SOCKET: /var/run/tailscale/tailscaled.sock
