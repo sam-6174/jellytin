@@ -8,6 +8,7 @@ services:
     command: tailscaled
     environment:
       TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock
       TS_STATE_DIR: /var/lib/tailscale_state
     network_mode: host
     volumes:
