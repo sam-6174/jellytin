@@ -2,16 +2,23 @@
 version: "3"
 
 services:
-  npm-tailscale:
+  tailscale:
+    privileged: true
+    network_mode: host
+    cap_add:
+      - net_admin
+      - sys_module  # try deleting this
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
+    hostname: npm-tunnel
+    command: tailscaled --statedir=/var/lib/tailscale_state  # try using env var
     environment:
       TS_EXTRA_ARGS: --advertise-tags=tag:npm-tunnel
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock
       TS_STATE_DIR: /var/lib/tailscale_state
-      TS_USERSPACE: 'true'
     volumes:
       - tailscale_state:/var/lib/tailscale_state
-    network_mode: "container:nginx-proxy-manager"
+      - /dev/net/tun:/dev/net/tun
 volumes:
   tailscale_state:
     driver: local

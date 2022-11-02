@@ -39,6 +39,7 @@ services:
       - npm_letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
+      - 81:81
       - 443:443
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
