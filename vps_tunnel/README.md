@@ -26,6 +26,10 @@
     * Deploy via `docker-compose up -d`
     * Check the stack's health via `docker-compose ps`
       * All 3 containers should eventually have `State` = `Up`
+    * Check tailscale status:
+      ```shell
+      docker exec -it $(docker container ls | grep tailscale | awk '{print $1}') tailscale status
+      ```
 
 
 ### Configure NPM Admin
