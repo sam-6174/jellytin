@@ -14,7 +14,7 @@
     * Copy the variables template via `cp ./template.env ./.env`
     * Open `./.env` and set the SECRET values
 1) Authenticate Tailscale Container
-    * Execute `docker-compose run --rm tailscale`
+    * Execute `docker-compose run --rm tailscale /bin/sh /tailscale/run.sh`
     * Copy the URL from the above command's output
     * Paste the URL into your web browser
     * Authorize the container
