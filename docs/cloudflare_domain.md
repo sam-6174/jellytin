@@ -3,15 +3,12 @@
 * Purchase your domain via [this](https://developers.cloudflare.com/registrar/get-started/register-domain)
 * We'll assume that you purchase a domain of `__MY_SITE__.__COM__`
 * Login to [cloudflare](https://cloudflare.com)
-  * Disable Jellyfin caching
-    * Go to `Websites` > `__MY_SITE__.__COM__` > `Page Rules` > `Create Page Rule`
-      * `URL` = `jf.__MY_SITE__.__COM__/*`
-      * `Setting Cache Level` = `Bypass`
   * Add wildcard CNAME for subdomains
     * Go to `Websites` > `__MY_SITE__.__COM__` > `DNS` > `Add record`
       * `Type` = `CNAME`
       * `Name` = `*`
       * `Target` = `__MY_SITE__.__COM__`
+      * `Proxy status` = Disabled
 * Configure `<security stuff>`
   * Sorry, this isn't fully documented...
     * ... feel free to open a PR & improve this =)
