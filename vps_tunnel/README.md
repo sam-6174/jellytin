@@ -4,8 +4,6 @@
 ### Prerequisites
 
 * Install [docker-compose](../docker_install.sh) on your VPS
-* [Register](https://login.tailscale.com/start) for a Tailscale Account
-* `Enable MagicDNS` for Tailscale [here](https://login.tailscale.com/admin/dns)
 
 
 ### Deploy Tunnel on VPS

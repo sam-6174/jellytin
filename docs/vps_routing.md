@@ -1,12 +1,6 @@
 # Route 👤 -> `VPS` -> `Nginx` -> `Tailscale` -> `Nginx`
 
 
-### Configure Tailscale
-
-* Modify Tailscale ACL [here](https://login.tailscale.com/admin/acls)
-* Replace `__YOUR_EMAIL__` in the [./tailscale_acl.jsonc](./tailscale_acl.jsonc) config
-
-
 ### Configure `Nginx` -> `Tailscale` -> `Nginx`
 
 Reminder for how to access Nginx Proxy Manager on the VPS:
