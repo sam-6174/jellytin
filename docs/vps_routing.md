@@ -4,69 +4,7 @@
 ### Configure Tailscale
 
 * Modify Tailscale ACL [here](https://login.tailscale.com/admin/acls)
-* Replace `__YOUR_EMAIL__` in the below Access Control config
-  ```json
-  {
-    "groups": {
-      "group:tailscale-admin": ["__YOUR_EMAIL__"],
-    },
-    "tagOwners": {
-      "tag:vps-tunnel": ["group:tailscale-admin"],
-      "tag:npm-tunnel": ["group:tailscale-admin"],
-    },
-    "acls": [
-      {
-        "action": "accept",
-        "src":    ["group:tailscale-admin"],
-        "dst":    ["*:*"],
-      },
-      {
-        "action": "accept",
-        "src":    ["tag:vps-tunnel"],
-        "dst":    ["tag:npm-tunnel:80"],
-      },
-      {
-        "action": "accept",
-        "src":    ["tag:npm-tunnel"],
-        "dst":    ["tag:vps-tunnel:80"],
-      },
-    ],
-    "tests": [
-      { // Accept admin
-        "src":    "group:tailscale-admin",
-        "accept": ["tag:npm-tunnel:123"],
-      },
-      { // Accept admin
-        "src":    "group:tailscale-admin",
-        "accept": ["tag:vps-tunnel:456"],
-      },
-      { // Accept http VPS Tunnel -> NPM Tunnel
-        "src":    "tag:vps-tunnel",
-        "accept": ["tag:npm-tunnel:80"],
-      },
-      { // Accept http NPM Tunnel -> VPS Tunnel
-        "src":    "tag:npm-tunnel",
-        "accept": ["tag:vps-tunnel:80"],
-      },
-      { // Deny non-http VPS Tunnel -> NPM Tunnel
-        "src":  "tag:vps-tunnel",
-        "deny": ["tag:npm-tunnel:123"],
-      },
-      { // Deny non-http NPM Tunnel -> VPS Tunnel
-        "src":  "tag:npm-tunnel",
-        "deny": ["tag:vps-tunnel:456"],
-      },
-      { // Deny VPS Tunnel -> Admin
-        "src":  "tag:vps-tunnel",
-        "deny": ["group:tailscale-admin:80"],
-      },
-      { // Deny NPM Tunnel -> Admin
-        "src":  "tag:npm-tunnel",
-        "deny": ["group:tailscale-admin:80"],
-      },
-    ],
-  }
-  ```
+* Replace `__YOUR_EMAIL__` in the [./tailscale_acl.jsonc](./tailscale_acl.jsonc) config
 
 
 ### Configure `Nginx` -> `Tailscale` -> `Nginx`
