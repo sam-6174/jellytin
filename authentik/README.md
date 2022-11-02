@@ -1,3 +1,6 @@
+# Deploy Authentik
+
+
 The contents in this directory have been modified from the Authentik [docs](https://goauthentik.io/docs/installation/docker-compose/).
 
 * Copy the variables template via `cp ./template.env ./.env`

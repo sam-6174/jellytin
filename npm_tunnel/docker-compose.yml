@@ -1,0 +1,24 @@
+---
+version: "3"
+
+services:
+  tailscale:
+    privileged: true
+    network_mode: host
+    cap_add:
+      - net_admin
+      - sys_module
+    image: tailscale/tailscale:$TAILSCALE_TAG
+    restart: unless-stopped
+    hostname: npm-tunnel
+    command: tailscaled --statedir=/var/lib/tailscale_state
+    environment:
+      TS_EXTRA_ARGS: --advertise-tags=tag:npm-tunnel
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock
+      TS_STATE_DIR: /var/lib/tailscale_state
+    volumes:
+      - tailscale_state:/var/lib/tailscale_state
+      - /dev/net/tun:/dev/net/tun
+volumes:
+  tailscale_state:
+    driver: local

@@ -1,16 +1,32 @@
----
-version: "3"
-
+version: "3.9"
 services:
+  tailscale:
+    privileged: true
+    network_mode: host
+    cap_add:
+      - net_admin
+      - sys_module
+    image: tailscale/tailscale:$TAILSCALE_TAG
+    restart: unless-stopped
+    hostname: vps-tunnel
+    command: tailscaled --statedir=/var/lib/tailscale_state
+    environment:
+      TS_EXTRA_ARGS: --advertise-tags=tag:vps-tunnel
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock
+      TS_STATE_DIR: /var/lib/tailscale_state
+    volumes:
+      - tailscale_state:/var/lib/tailscale_state
+      - /dev/net/tun:/dev/net/tun
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:$NPM_TAG
     restart: unless-stopped
+    depends_on:
+      - npm-mysql
+      - tailscale
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
       timeout: 3s
-    depends_on:
-      - npm-mysql
     environment:
       DB_MYSQL_HOST: npm-mysql
       DB_MYSQL_NAME: $NPM__MYSQL_DB
@@ -20,17 +36,11 @@ services:
       # Uncomment if IPv6 is not enabled on your host
       # DISABLE_IPV6: true
     volumes:
-      - ./mounts/data:/data
       - npm_letsencrypt:/etc/letsencrypt
     ports:
-      - 80:80 # Public HTTP Port
-      - 443:443 # Public HTTPS Port
-      - 81:81 # Admin Web Port
-      # Add any other Stream port you want to expose
-      # - 21:21 # FTP
-    networks:
-      - authentik
-      - default
+      - 80:80
+      - 81:81
+      - 443:443
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
@@ -46,6 +56,5 @@ volumes:
     driver: local
   npm_letsencrypt:
     driver: local
-networks:
-  authentik:
-    name: authentik
+  tailscale_state:
+    driver: local

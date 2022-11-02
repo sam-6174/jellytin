@@ -17,19 +17,27 @@ This project is especially helpful if you:
 If you're wondering, "why can't I just expose my Jellyfin server to the internet?"
 I recommend reading [Collection of potential security issues in Jellyfin](https://github.com/jellyfin/jellyfin/issues/5415)
 
+The final deployment looks like this:
+
+👤 -> `VPS` -> `Nginx` -> `Tailscale` -> `Nginx` -> `Authentik` -> `Jellyfin`
+
 
 ### Dependencies
+* Virtual Private Server (VPS)
+  * [BuyKVM](https://buyvm.net/kvm-dedicated-server-slices/) is  $2/month,
+      but any VPS with an IPv4 address will do
+  * Additional layer of security, e.g. hide your personal IP
+* [Nginx Proxy Manager](https://nginxproxymanager.com/)
+  * Management UI for Nginx
+* [Tailscale](https://tailscale.com/)
+  * Tunnel from VPS to your local network
 * [Authentik](https://goauthentik.io/)
   * Provide authentication via LDAP, SSO, etc.
-* [Nginx Proxy Manager](https://nginxproxymanager.com/)
-  * Proxy between `Cloudflare Tunnel` -> `Nginx Reverse Proxy` -> `Authentik` -> `Jellyfin`
-* [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/)
-  * Serve content without forwarding ports on your router
+* [Jellyfin](https://jellyfin.org/downloads/)
+  * You should already have a Jellyfin server
 
 
 ### Future Improvements
-
-1) Replace Cloudflare tunnel with VPS tunnel; it's against Cloudflare's TOS to proxy non-html content.
 
 1) This setup currently only allows for access to Jellyfin via web clients.
 Jellyfin lacks external authentication capabilities for other clients.
@@ -67,8 +75,17 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 ### Purchase & Configure Cloudflare Domain
 * Configure via [./docs/cloudflare_domain.md](./docs/cloudflare_domain.md)
 
-### Deploy Cloudflare Tunnel
-* Deploy via [./cloudflare_tunnel/](./cloudflare_tunnel/)
+### Harden Your VPS
+* Harden via [./docs/vps_harden.md](./docs/vps_harden.md)
+
+### Deploy VPS Tunnel
+* Deploy via [./vps_tunnel/](./vps_tunnel/)
+
+### Deploy NPM Tunnel
+* Deploy via [./npm_tunnel/](./npm_tunnel/)
+
+### Configure Tunnel Routing
+* Configure via [./docs/vps_routing.md](./docs/vps_routing.md)
 
 ### Configure Nginx -> Authentik
 * Configure via [./docs/npm_to_authentik.md](./docs/npm_to_authentik.md)
