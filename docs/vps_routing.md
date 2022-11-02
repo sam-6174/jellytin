@@ -17,13 +17,18 @@
     "acls": [
       {
         "action": "accept",
-        "src": ["group:tailscale-admin"],
-        "dst": ["*:*"],
+        "src":    ["group:tailscale-admin"],
+        "dst":    ["*:*"],
       },
       {
         "action": "accept",
-        "src": ["tag:vps-tunnel"],
-        "dst": ["tag:npm-tunnel:80"],
+        "src":    ["tag:vps-tunnel"],
+        "dst":    ["tag:npm-tunnel:80"],
+      },
+      {
+        "action": "accept",
+        "src":    ["tag:npm-tunnel"],
+        "dst":    ["tag:vps-tunnel:80"],
       },
     ],
     "tests": [
@@ -35,13 +40,29 @@
         "src":    "group:tailscale-admin",
         "accept": ["tag:vps-tunnel:456"],
       },
-      { // Accept VPS Tunnel -> NPM Tunnel
+      { // Accept http VPS Tunnel -> NPM Tunnel
         "src":    "tag:vps-tunnel",
         "accept": ["tag:npm-tunnel:80"],
       },
-      { // Deny NPM Tunnel -> VPS Tunnel
+      { // Accept http NPM Tunnel -> VPS Tunnel
+        "src":    "tag:npm-tunnel",
+        "accept": ["tag:vps-tunnel:80"],
+      },
+      { // Deny non-http VPS Tunnel -> NPM Tunnel
+        "src":  "tag:vps-tunnel",
+        "deny": ["tag:npm-tunnel:123"],
+      },
+      { // Deny non-http NPM Tunnel -> VPS Tunnel
         "src":  "tag:npm-tunnel",
-        "deny": ["tag:vps-tunnel:80"],
+        "deny": ["tag:vps-tunnel:456"],
+      },
+      { // Deny VPS Tunnel -> Admin
+        "src":  "tag:vps-tunnel",
+        "deny": ["group:tailscale-admin:80"],
+      },
+      { // Deny NPM Tunnel -> Admin
+        "src":  "tag:npm-tunnel",
+        "deny": ["group:tailscale-admin:80"],
       },
     ],
   }
@@ -67,7 +88,7 @@ Reminder for how to access Nginx Proxy Manager on the VPS:
 1) Add SSL Certificate to Nginx Proxy Manager on the VPS
     * Open the `SSL Certificates` tab in NPM
     * Click `Add SSL Certificate`
-    * `Domain Names` = `*.__MY_SITE__.__COM__`
+    * `Domain Names` = `*.__MY_SITE__.__COM__` and `__MY_SITE__.__COM__`
     * Enable `Use a DNS Challenge`
     * `DNS Provider` = `Cloudflare`
     * Update `Credentials File Content` with your Cloudflare API token from above
@@ -78,15 +99,32 @@ Reminder for how to access Nginx Proxy Manager on the VPS:
     * Under the `Details` tab
       * `Domain Names` = `*.__MY_SITE__.__COM__`
       * `Scheme` = `http`
-      * `Forward Host` = `nginx-proxy-manager.__TAILNET_NAME__`
+      * `Forward Host` = `__NPM-TUNNEL_IP__`
+        * (Acquire the above IP from [here](https://login.tailscale.com/admin/machines))
       * `Port` = `80`
       * Enable `Block Common Exploits`
       * Enable `Websockets Support`
     * Under the `SSL` tab
-      * `SSL Certificate` = `*.__MY_SITE__.__COM__`
+      * `SSL Certificate` = *the certificate you created above*
       * Enable `Force SSL`
+      * Enable `HTTP/2 Support`
       * Enable `HSTS Enabled`
-      * Enable `HSTS Subdomains`
+    * Click `Save`
+1) Define Redirection Host for Nginx Proxy Manager on the VPS
+    * Open the `Hosts` > `Redirection Hosts` tab in NPM
+    * Click `Add Redirection Host`
+    * Under the `Details` tab
+      * `Domain Names` = `__MY_SITE__.__COM__`
+      * `Scheme` = `auto`
+      * `Forward Domain` = `auth.__MY_SITE__.__COM__`
+      * `HTTP Code` = `301`
+      * Enable `Preserve Path`
+      * Enable `Block Common Exploits`
+    * Under the `SSL` tab
+      * `SSL Certificate` = *the certificate you created above*
+      * Enable `Force SSL`
+      * Enable `HTTP/2 Support`
+      * Enable `HSTS Enabled`
     * Click `Save`
 
 
