@@ -78,6 +78,9 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 ### Harden Your VPS
 * Harden via [./docs/vps_harden.md](./docs/vps_harden.md)
 
+### Configure Tailscale
+* Configure via [./docs/tailscale_configure.md](./docs/tailscale_configure.md)
+
 ### Deploy VPS Tunnel
 * Deploy via [./vps_tunnel/](./vps_tunnel/)
 
