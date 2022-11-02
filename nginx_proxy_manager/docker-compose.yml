@@ -23,11 +23,9 @@ services:
       - ./mounts/data:/data
       - npm_letsencrypt:/etc/letsencrypt
     ports:
-      - 80:80 # Public HTTP Port
-      - 443:443 # Public HTTPS Port
-      - 81:81 # Admin Web Port
-      # Add any other Stream port you want to expose
-      # - 21:21 # FTP
+      - 80:80
+      - 443:443
+      - 81:81
     networks:
       - authentik
       - default

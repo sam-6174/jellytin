@@ -36,11 +36,12 @@ services:
       # Uncomment if IPv6 is not enabled on your host
       # DISABLE_IPV6: true
     volumes:
+      - ./mounts/data:/data
       - npm_letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
-      - 81:81
       - 443:443
+      - 81:81
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
