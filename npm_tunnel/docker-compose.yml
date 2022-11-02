@@ -7,6 +7,7 @@ services:
     network_mode: host
     cap_add:
       - net_admin
+      - sys_module  # try deleting this
     image: tailscale/tailscale:$TAILSCALE_TAG
     restart: unless-stopped
     hostname: npm-tunnel
