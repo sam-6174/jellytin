@@ -7,3 +7,10 @@ secret.env
 !authentik_ldap/.env
 
 */mounts
+!/vps_tunnel/mounts
+/vps_tunnel/mounts/*
+!/vps_tunnel/mounts/data
+/vps_tunnel/mounts/data/*
+!/vps_tunnel/mounts/data/nginx
+/vps_tunnel/mounts/data/nginx/*
+!/vps_tunnel/mounts/data/nginx/custom
