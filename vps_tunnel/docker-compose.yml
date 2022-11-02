@@ -39,16 +39,9 @@ services:
       - ./mounts/data:/data
       - npm_letsencrypt:/etc/letsencrypt
     ports:
-      # https://github.com/NginxProxyManager/nginx-proxy-manager/issues/41#issuecomment-464364484
+      - 80:80
+      - 443:443
       - 81:81
-      - target: 80
-        published: 80
-        protocol: tcp
-        mode: host
-      - target: 443
-        published: 443
-        protocol: tcp
-        mode: host
   npm-mysql:
     image: yobasystems/alpine-mariadb:10.6
     restart: unless-stopped
