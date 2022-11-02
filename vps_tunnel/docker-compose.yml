@@ -36,6 +36,7 @@ services:
       # Uncomment if IPv6 is not enabled on your host
       # DISABLE_IPV6: true
     volumes:
+      - ./mounts/data:/data
       - npm_letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
