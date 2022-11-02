@@ -92,4 +92,12 @@ Reminder for how to access Nginx Proxy Manager on the VPS:
 
 ### Configure Cloudflare DNS -> `VPS`
 
-* TODO
+* Login to the Cloudflare dashboard [here](https://dash.cloudflare.com)
+* Click through to `Websites` > `__MY_SITE__.__COM__` > `DNS`
+* Click `Edit` for `CNAME` of `__MY_SITE__.__COM__`
+  * `Delete` the record
+* Click `Add Record`
+  * `Type` = `A`
+  * `Name` = `__MY_SITE__.__COM__`
+  * `IPv4 address` = `__VPS_IP__`
+  * `Proxy status` = Disabled
