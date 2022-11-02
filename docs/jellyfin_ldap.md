@@ -3,7 +3,7 @@
 1) Open the Authentik Admin Dashboard
     * Go to `Directory` > `Users`
       * Click `📁 Root`
-      * Click `˅` to expand user `service-ldap-outpost`
+      * Click `>` to expand user `service-ldap-outpost`
       * Click `Set Password`
       * You can use `openssl rand -base64 36` to generate a password
 1) Install the [Jellyfin LDAP-Auth Plugin](https://github.com/jellyfin/jellyfin-plugin-ldapauth#installation)

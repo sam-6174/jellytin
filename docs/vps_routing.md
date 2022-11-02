@@ -46,14 +46,13 @@ Reminder for how to access Nginx Proxy Manager on the VPS:
       * `SSL Certificate` = *the certificate you created above*
       * Enable `Force SSL`
       * Enable `HTTP/2 Support`
-      * Enable `HSTS Enabled`
     * Click `Save`
 1) Define Redirection Host for Nginx Proxy Manager on the VPS
     * Open the `Hosts` > `Redirection Hosts` tab in NPM
     * Click `Add Redirection Host`
     * Under the `Details` tab
       * `Domain Names` = `__MY_SITE__.__COM__`
-      * `Scheme` = `auto`
+      * `Scheme` = `https`
       * `Forward Domain` = `auth.__MY_SITE__.__COM__`
       * `HTTP Code` = `301`
       * Enable `Preserve Path`
@@ -62,7 +61,6 @@ Reminder for how to access Nginx Proxy Manager on the VPS:
       * `SSL Certificate` = *the certificate you created above*
       * Enable `Force SSL`
       * Enable `HTTP/2 Support`
-      * Enable `HSTS Enabled`
     * Click `Save`
 
 
