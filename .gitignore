@@ -15,3 +15,11 @@ secret.env
 !/nginx_proxy_manager/mounts/data/nginx
 /nginx_proxy_manager/mounts/data/nginx/*
 !/nginx_proxy_manager/mounts/data/nginx/custom
+
+!/vps_tunnel/mounts
+/vps_tunnel/mounts/*
+!/vps_tunnel/mounts/data
+/vps_tunnel/mounts/data/*
+!/vps_tunnel/mounts/data/nginx
+/vps_tunnel/mounts/data/nginx/*
+!/vps_tunnel/mounts/data/nginx/custom
