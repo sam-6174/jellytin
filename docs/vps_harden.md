@@ -32,16 +32,16 @@ KEY_NAME='<your-key-name>'
 VPS_IP='<your-vps-ip-address>'
 
 # create your public+private key pair
-ssh-keygen -t rsa -b 4096 -o -a 100 -f ~"/.ssh/$KEY_NAME"
+ssh-keygen -t rsa -b 4096 -o -a 100 -f ~/.ssh/"$KEY_NAME"
 
 # ensure keys are only read-writable by $USER
-chmod 600 ~"/.ssh/$KEY_NAME" ~"/.ssh/$KEY_NAME.pub"
+chmod 600 ~/.ssh/"$KEY_NAME" ~/.ssh/"$KEY_NAME".pub
 
 # install public key on VPS
-ssh-copy-id -i ~"/.ssh/$KEY_NAME.pub" "$YOUR_USER@$VPS_IP"
+ssh-copy-id -i ~/.ssh/"$KEY_NAME".pub "$YOUR_USER@$VPS_IP"
 
 # test login with private key
-ssh -i ~"/.ssh/$KEY_NAME" "$YOUR_USER@$VPS_IP"
+ssh -i ~/.ssh/"$KEY_NAME" "$YOUR_USER@$VPS_IP"
 ```
 
 
@@ -66,7 +66,7 @@ sudo systemctl restart sshd
 systemctl status sshd
 
 # from a shell on your local machine, confirm that you can connect via new port
-ssh -i ~"/.ssh/$KEY_NAME" -p "$SSH_RAND_PORT" "$YOUR_USER@$VPS_IP"
+ssh -i ~/.ssh/"$KEY_NAME" -p "$SSH_RAND_PORT" "$YOUR_USER@$VPS_IP"
 
 # remove backup
 sudo rm /etc/ssh/sshd_config.bak
@@ -85,7 +85,7 @@ Host $VPS_SSH_NAME
     Hostname $VPS_IP
     Port $SSH_RAND_PORT
     User $YOUR_USER
-    IdentityFile ~"/.ssh/$KEY_NAME"
+    IdentityFile ~/.ssh/"$KEY_NAME"
 EOF
 
 # test that you can SSH via config
