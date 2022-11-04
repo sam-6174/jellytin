@@ -13,6 +13,7 @@ This project is especially helpful if you:
 1) Have a local Jellyfin server that you want to access over the internet
 1) Do *not* currently have any infrastructure to expose services to the internet
 1) Wish to hide + secure Jellyfin behind an identity provider
+1) Wish to use Jellyfin [clients](https://jellyfin.org/clients/) (Android, etc.)
 
 If you're wondering, "why can't I just expose my Jellyfin server to the internet?"
 I recommend reading [Collection of potential security issues in Jellyfin](https://github.com/jellyfin/jellyfin/issues/5415)
@@ -24,7 +25,7 @@ The final deployment looks like this:
 
 ### Dependencies
 * Virtual Private Server (VPS)
-  * [BuyKVM](https://buyvm.net/kvm-dedicated-server-slices/) is  $2/month,
+  * [BuyKVM](https://buyvm.net/kvm-dedicated-server-slices/) is $2/month,
       but any VPS with an IPv4 address will do
   * Additional layer of security, e.g. hide your personal IP
 * [Nginx Proxy Manager](https://nginxproxymanager.com/)
@@ -38,12 +39,6 @@ The final deployment looks like this:
 
 
 ### Future Improvements
-
-1) This setup currently only allows for access to Jellyfin via web clients.
-Jellyfin lacks external authentication capabilities for other clients.
-See examples [here](https://github.com/jellyfin/jellyfin-android/issues/123),
-[here](https://features.jellyfin.org/posts/471/header-authentication),
-& [here](https://features.jellyfin.org/posts/1461/capability-to-specify-client-certificate-for-android-client).
 
 1) Keep an eye on Jellyfin's [SSO plugin](https://github.com/9p4/jellyfin-plugin-sso)
 and incorporate it here, once it is stable and no longer "100% alpha software."
@@ -104,6 +99,9 @@ If you're using a Raspberry Pi, then you will need the [64-bit OS](https://www.r
 
 ### Create Jellyfin Users via Authentik
 * Create via [./docs/jellyfin_ldap_users.md](./docs/jellyfin_ldap_users.md)
+
+### Configure NPM to Enable Jellyfin Client Apps
+* Configure via [./docs/jellyfin_client_whitelist.md](./docs/jellyfin_client_whitelist.md)
 
 ---
 

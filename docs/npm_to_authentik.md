@@ -1,6 +1,9 @@
 # Configure Nginx -> Authentik
 
-* Open Nginx Proxy Manager and click `Add Proxy Host`
+(Use Nginx Proxy Manager running on your local
+network, *not* on your VPS).
+
+* Open NPM and click `Add Proxy Host`
   * Under the `Details` tab, set these values:
     * `Domain Names` = `*.__MY_SITE__.__COM__`
     * `Scheme` = `http`
