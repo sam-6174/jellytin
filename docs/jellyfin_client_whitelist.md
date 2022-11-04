@@ -58,38 +58,38 @@ The logic of the `{Nginx IP Check}` works like this:
 network, *not* on your VPS).
 
 * Open NPM and click `Add Proxy Host`
-  * Click the `Details` tab
-    * `Domain Names` = `jellyfin-whitelist.__MY_SITE__.__COM__`
+* Click the `Details` tab
+  * `Domain Names` = `jellyfin-whitelist.__MY_SITE__.__COM__`
+  * `Scheme` = `http`
+  * `Hostname` = `does-not-exist`
+    * (we'll configure this elsewhere)
+  * `Port` = `4321`
+    * (we'll configure this elsewhere)
+  * Enable `Block Common Exploits`
+  * Enable `Websockets Support`
+* Click the `Custom locations` tab
+  * Click `Add location`
+    * `location` = `/`
     * `Scheme` = `http`
-    * `Hostname` = `does-not-exist`
-      * (we'll configure this elsewhere)
-    * `Port` = `4321`
-      * (we'll configure this elsewhere)
-    * Enable `Block Common Exploits`
-    * Enable `Websockets Support`
-  * Click the `Custom locations` tab
-    * Click `Add location`
-      * `location` = `/`
-      * `Scheme` = `http`
-      * `Hostname` = `__JELLYFIN_IP__`
-      * `Port` = `__JELLYFIN_PORT__`
-      * Click the ⚙️ button to enter your custom Nginx configuration:
-        * Paste the contents of [./jellyfin_client_whitelist.conf](./jellyfin_client_whitelist.conf)
-    * Click `Add location`
-      * `location` = `/authentik_sessions/`
-      * `Scheme` = `http`
-      * `Hostname` = `authentik-server/api/v3/core/authenticated_sessions/`
-      * `Port` = `9000`
-      * Click the ⚙️ button to enter your custom Nginx configuration:
-        ```nginx
-        internal;
-        proxy_pass_request_headers off;
-        proxy_pass_request_body off;
-        proxy_set_header Accept "application/json";
-        proxy_set_header Authorization "Bearer __Authentik_API_Token__";
-        ```
-        * (Replace `__Authentik_API_Token__` with the value from prior)
-    * `Save` the proxy
+    * `Hostname` = `__JELLYFIN_IP__`
+    * `Port` = `__JELLYFIN_PORT__`
+    * Click the ⚙️ button to enter your custom Nginx configuration:
+      * Paste the contents of [./jellyfin_client_whitelist.conf](./jellyfin_client_whitelist.conf)
+  * Click `Add location`
+    * `location` = `/authentik_sessions/`
+    * `Scheme` = `http`
+    * `Hostname` = `authentik-server/api/v3/core/authenticated_sessions/`
+    * `Port` = `9000`
+    * Click the ⚙️ button to enter your custom Nginx configuration:
+      ```nginx
+      internal;
+      proxy_pass_request_headers off;
+      proxy_pass_request_body off;
+      proxy_set_header Accept "application/json";
+      proxy_set_header Authorization "Bearer __Authentik_API_Token__";
+      ```
+      * (Replace `__Authentik_API_Token__` with the value from prior)
+  * `Save` the proxy
 
 
 ### Test the Whitelist
